@@ -1,11 +1,12 @@
 from embedder import embed_chunks
 from loader import load_and_chunk
+from retriever import retrieve
 
 if __name__ == "__main__":
-    # step 1 — load and chunk
-    chunks = load_and_chunk("kb_article.md")
-    print(f"Split into {len(chunks)} chunks")
-
-    # step 2 — embed and store
-    vector_store = embed_chunks(chunks)
-    print("Stored in Supabase successfully")
+    query="how do I fix exclusive lock error in Access?"
+    results = retrieve(query)
+    
+    for i, doc in enumerate(results):
+        print(f"\n--- Result {i+1} ---")
+        print(f"Content : {doc.page_content}")
+        print(f"Metadata: {doc.metadata}")
