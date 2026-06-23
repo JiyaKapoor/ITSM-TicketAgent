@@ -5,12 +5,14 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-loader=UnstructuredMarkdownLoader("kb_article.md",mode="elements")
-raw_docs=loader.load()
-splitter=RecursiveCharacterTextSplitter(chunk_size=500,chunk_overlap=50)
-chunks=splitter.split_documents(raw_docs)
-for i, chunk in enumerate(chunks):
-    print(f"\n--- Chunk {i+1} ---")
-    print(f"Content : {chunk.page_content}")
-    print(f"Metadata: {chunk.metadata}")
+def load_and_chunk(filepath):
+    loader=UnstructuredMarkdownLoader(filepath,mode="elements")
+    raw_docs=loader.load()
+    splitter=RecursiveCharacterTextSplitter(chunk_size=500,chunk_overlap=50)
+    chunks=splitter.split_documents(raw_docs)
+    for i, chunk in enumerate(chunks):
+        print(f"\n--- Chunk {i+1} ---")
+        print(f"Content : {chunk.page_content}")
+        print(f"Metadata: {chunk.metadata}")
+    return chunks
  
