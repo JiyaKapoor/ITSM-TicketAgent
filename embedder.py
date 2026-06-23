@@ -11,3 +11,4 @@ os.environ["MISTRAL_API_KEY"] = MISTRAL_API_KEY
 def embed_chunks(chunks):
     embeddings=MistralAIEmbeddings(model="mistral-embed")
     vector_store=PGVector.from_documents(documents=chunks,embedding=embeddings,connection=CONNECTION_STRING,collection_name="kb_articles",use_jsonb=True)
+    

@@ -1,12 +1,10 @@
 from embedder import embed_chunks
 from loader import load_and_chunk
 from retriever import retrieve
+from resolution import generate_resolution
 
 if __name__ == "__main__":
     query="how do I fix exclusive lock error in Access?"
-    results = retrieve(query)
+    resolution=generate_resolution(query)
+    print(resolution)
     
-    for i, doc in enumerate(results):
-        print(f"\n--- Result {i+1} ---")
-        print(f"Content : {doc.page_content}")
-        print(f"Metadata: {doc.metadata}")
